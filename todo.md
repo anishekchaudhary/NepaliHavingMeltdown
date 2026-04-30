@@ -6,10 +6,10 @@
 5) Create SFD for that ✅
 4) Use the papers to simulate and create CLD ✅
 5) Verify initial values and equations 
-5) Run the model and generate graph
+5) Run the model and generate graph 
 6) create explanation for the model 
 7) create report for the system 
-8) create ppt for this system 
+8) create ppt for this system - pratik
 9) prepare for presentation 
 
 
