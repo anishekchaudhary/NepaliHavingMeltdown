@@ -1,0 +1,178 @@
+{UTF-8}
+GreenHouseGas = A FUNCTION OF( Human Emission,Permafrost Emission,Ocean Sink,Terrestrial Sink\
+		)
+	~	Dmnl
+	~		|
+
+Temperature = A FUNCTION OF( GreenHouseGas,Surface Albedo)
+	~	Dmnl
+	~		|
+
+Glacier Ice = A FUNCTION OF( Snowfall,Glacier Melt Rate)
+	~	Dmnl
+	~		|
+
+Glacial Lake = A FUNCTION OF( Glacier Melt Rate,Thermal Undercutting)
+	~	Dmnl
+	~		|
+
+Forest Cover = A FUNCTION OF( Deforestation,Terrestrial Sink)
+	~	Dmnl
+	~		|
+
+Black Carbon = A FUNCTION OF( BC Albedo Effect,Glacier Melt Rate)
+	~	Dmnl
+	~		|
+
+Surface Albedo = A FUNCTION OF( Glacier Ice,BC Albedo Effect)
+	~	Dmnl
+	~		|
+
+Glacier Melt Rate = A FUNCTION OF( Temperature,Black Carbon,Thermal Undercutting)
+	~	Dmnl
+	~		|
+
+Snowfall = A FUNCTION OF( Temperature)
+	~	Dmnl
+	~		|
+
+GLOF Risk = A FUNCTION OF( Glacial Lake)
+	~	Dmnl
+	~		|
+
+Thermal Undercutting = A FUNCTION OF( Glacial Lake,Temperature)
+	~	Dmnl
+	~		|
+
+Human Emission = A FUNCTION OF( )
+	~	Dmnl
+	~		|
+
+Permafrost Emission = A FUNCTION OF( Temperature)
+	~	Dmnl
+	~		|
+
+Ocean Sink = A FUNCTION OF( GreenHouseGas)
+	~	Dmnl
+	~		|
+
+Terrestrial Sink = A FUNCTION OF( Forest Cover)
+	~	Dmnl
+	~		|
+
+BC Albedo Effect = A FUNCTION OF( Black Carbon)
+	~	Dmnl
+	~		|
+
+Deforestation = A FUNCTION OF( Forest Cover,GLOF Risk)
+	~	Dmnl
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 100
+	~	Year
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Year
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  =
+        TIME STEP
+	~	Year [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 1
+	~	Year [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,100,2
+10,1,GreenHouseGas,1144,163,63,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,Temperature,1144,363,53,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,3,Glacier Ice,844,363,53,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,4,Glacial Lake,1015,598,53,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,5,Forest Cover,1494,363,53,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,6,Black Carbon,1494,163,53,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,Surface Albedo,994,263,57,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,8,Glacier Melt Rate,890,469,60,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,9,Snowfall,694,363,46,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,10,GLOF Risk,844,663,46,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,11,Thermal Undercutting,694,513,60,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,12,Human Emission,994,63,63,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,13,Permafrost Emission,1144,63,63,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,14,Ocean Sink,1314,63,46,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,15,Terrestrial Sink,1444,63,57,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,16,BC Albedo Effect,1294,263,57,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,17,Deforestation,1514,474,53,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,18,12,1,1,0,43,0,1,192,0,255-128-0,|||0-0-0,1|(1054,120)|
+1,19,13,1,1,0,43,0,1,192,0,255-128-0,|||0-0-0,1|(1184,120)|
+1,20,14,1,1,0,45,0,1,192,0,255-128-0,|||0-0-0,1|(1244,135)|
+1,21,15,1,1,0,45,0,1,192,0,0-110-0,|||0-0-0,1|(1294,120)|
+1,22,1,2,1,0,43,0,1,192,0,255-128-0,|||0-0-0,1|(1174,260)|
+1,23,2,13,1,0,43,0,1,192,0,255-128-0,|||0-0-0,1|(1104,210)|
+1,24,1,14,1,0,43,0,1,192,0,255-128-0,|||0-0-0,1|(1229,120)|
+1,25,2,8,1,0,43,0,1,192,0,0-0-200,|||0-0-0,1|(1034,420)|
+1,26,2,9,0,0,45,0,1,192,0,0-0-200,|||0-0-0,1|(0,0)|
+1,27,8,3,1,0,45,0,1,192,0,0-0-200,|||0-0-0,1|(859,415)|
+1,28,9,3,0,0,43,0,1,192,0,0-0-200,|||0-0-0,1|(0,0)|
+1,29,3,7,1,0,43,0,1,192,0,192-0-0,|||0-0-0,1|(919,315)|
+1,30,7,2,1,0,45,0,1,192,0,192-0-0,|||0-0-0,1|(1074,320)|
+1,31,8,4,1,0,43,0,1,192,0,0-160-0,|||0-0-0,1|(964,540)|
+1,32,4,11,1,0,43,0,1,192,0,0-160-0,|||0-0-0,1|(849,560)|
+1,33,11,8,1,0,43,0,1,192,0,0-160-0,|||0-0-0,1|(784,495)|
+1,34,2,11,0,0,43,0,1,192,0,0-160-0,|||0-0-0,1|(0,0)|
+1,35,4,10,1,0,43,0,1,192,0,0-160-0,|||0-0-0,1|(929,633)|
+1,36,10,17,0,0,43,0,1,192,0,0-110-0,|||0-0-0,1|(0,0)|
+1,37,17,5,0,0,45,0,1,192,0,0-110-0,|||0-0-0,1|(0,0)|
+1,38,5,15,0,0,43,0,1,192,0,0-110-0,|||0-0-0,1|(0,0)|
+1,39,5,17,0,0,43,0,1,192,0,0-110-0,|||0-0-0,1|(0,0)|
+1,40,6,16,0,0,43,0,1,192,0,128-0-128,|||0-0-0,1|(0,0)|
+1,41,16,7,0,0,45,0,1,192,0,128-0-128,|||0-0-0,1|(0,0)|
+1,42,6,8,0,0,43,0,1,192,0,128-0-128,|||0-0-0,1|(0,0)|
+1,43,11,4,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,44,15,5,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,45,16,6,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,46,8,6,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+///---\\\
+:L<%^E!@
+5:Time
+19:100,0
+24:0
+25:0
+26:0
+23:0
+15:0,0,0,0,0,0
+27:0,
+34:0,
+42:0
+72:0
+73:0
+95:0
+96:0
+97:0
+77:0
+78:0
+102:1
+93:0
+94:0
+92:0
+91:0
+90:0
+87:0
+75:
+43:
+103:8,8,8,3,8
+105:0,0,0,0,0,0,0,0,0,0
+104:Vensim Sans|12||0-0-0|0-0-0|-1--1--1|0-0-255|192-192-192|-1--1--1
