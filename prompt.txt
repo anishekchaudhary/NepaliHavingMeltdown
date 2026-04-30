@@ -1,0 +1,35 @@
+Part 1: Recent Updates Made to the Model
+Please take note of the following structural and mathematical changes I have already made so you understand the current state of the model:
+Ocean Sink Equation: Updated from 10.6 * LN(MAX(GreenHouseGas / Initial GHG, 1) + 1) to 10.6 * LN(GreenHouseGas / Initial GHG + 1).
+Snow Probability Equation: Updated from MAX(0, MIN(1, 1 / (1 + EXP(1.2 * (Temperature - 3))))) to 1 / (1 + EXP(1.2 * (Temperature - 3))).
+Surface Melt Rate Unit: Changed from km³/Year to km³/(Year*Celsius).
+Permafrost Emission Equation: Updated from IF THEN ELSE(Delta Temperature > Permafrost Thaw Threshold, 0.037 * (Delta Temperature - Permafrost Thaw Threshold), 0) to IF THEN ELSE(Delta Temperature > Permafrost Thaw Threshold, 0.0154 * (Delta Temperature - Permafrost Thaw Threshold), 0).
+New Connections: Added an arrow from GLOF Risk Index to Flood Pressure.
+GLOF Risk Index Dependencies
+Flow Update: Joined the stocks Snow Cover and Glacier Volume with the flow  Glacial Deposit.
+Clean up: Removed the variable Duration and the shadow variable Snowfall Precipitation.
+Part 2: Tasks to Execute & Equations to Fix
+Please help me fix and rewrite the following equations and parameters:
+Base Temperature Initial Value: The current initial value is 14°C, which is inaccurate for a glacial altitude of,  in Nepal. Suggest a more scientifically accurate Initial Base Temperature.
+Human Emissions Equation: 
+GLOF Threshold Equation: 
+GLOF Risk Index & Deforestation: The GLOF Risk Index is currently causing the following issue with Deforestation: scope of the system. How can I formulate this connection to fix the error?
+Melt Water Inflow: How do we write the equation to ensure that Melt Water Inflow is always strictly less than the Glacier Melt Rate?
+Ice Fraction & Surface Albedo Equations: The current equations are Changed equations of Permafrost Emission 
+from IF THEN ELSE(Delta Temperature > Permafrost Thaw Threshold,
+	0.037 * (Delta Temperature - Permafrost Thaw Threshold), 0)
+
+to IF THEN ELSE(Delta Temperature > Permafrost Thaw Threshold,
+	0.0154 * (Delta Temperature - Permafrost Thaw Threshold), 0)
+ . Please check these for logical consistency and unit balance.
+New Policies: Help me formulate Base Deforestation Rate and Greenhouse Emission as Policy variables (sliders/switches) so we can test scenarios.
+Part 3: Conceptual Questions for System Dynamics
+Please answer the following modeling questions:
+Why is it standard practice (or not) to consider Temperature in the Glacial Deposit flow? Should I add it?
+Dynamically speaking, does the presence and growth of Glacial Lakes have a reinforcing effect on Glacier Melt Rate (e.g., via calving or thermal undercutting)? How should I model this?
+Should we link Black Carbon Emission to Human Emission, and make it policy-dependent? What would that equation structure look like?
+What is the physical meaning of the variable Ice Fraction in this context?
+Part 4: Documentation Outputs
+Based on all the above:
+Generate a comprehensive text-based Dependency Graph of the updated system.
+Provide a very brief, one-line explanation of the meaning of every variable, flow, and stock mentioned in this prompt to serve as my model documentation.

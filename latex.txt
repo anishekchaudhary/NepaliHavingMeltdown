@@ -1,0 +1,212 @@
+\documentclass[12pt, a4paper]{article}
+
+% Required packages
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{top=1in, bottom=1in, left=1in, right=1in}
+\usepackage{hyperref}
+\usepackage{graphicx} % Added package for inserting images
+\usepackage{titling}
+\usepackage{float} % Added for better image positioning
+
+% Title and Author Information
+\title{\textbf{Updated Report: System Dynamics Modeling of the Effect of Greenhouse Gases on Ice Cover}}
+\author{
+    Anishek Kumar Chaudhary (24M0787) \and 
+    Pratik Man Shah (24M0856) \and
+    Ritika Jaiswal (24M0855) \and 
+    Rohit Agrawal (24M0744)
+}
+\date{} 
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction and What We Updated}
+This report covers the recent updates we made to our System Dynamics Model, which looks at how greenhouse gases are causing global ice cover and glaciers to melt. The main goal of this update was to take our project from a basic visual concept and turn it into a working mathematical simulation.
+
+In our first draft, we mainly focused on drawing out the ideas to show how things like melting ice and global temperatures are connected. Now, we've actually built the math behind it so we can test different scenarios. We added three major updates to make the model more realistic: we changed how we calculate the warming effect of carbon dioxide so it matches real physics, we broke down how the Earth stores carbon into different categories, and we added a "tipping point" for melting permafrost. Together, these changes give us a much better picture of how fast global ice is melting and how bad the resulting environmental risks, like rising sea levels and flooding, could get.
+
+\section{Details of Our Model Changes}
+
+\subsection{Moving from Diagrams to Math Equations}
+We took our original Causal Loop Diagrams (which just had arrows showing what affects what) and converted them into actual Stock and Flow models. Instead of just saying "more carbon means more heat," we are now using differential equations to calculate exactly how much carbon is building up and how fast the ice is depleting over time. We also tweaked our starting numbers to match real global mass-balance data, so our model's predictions make sense on a worldwide scale.
+
+\subsection{Calculating Temperature Changes Logarithmically}
+Before, we basically assumed that adding more $CO_2$ to the atmosphere would increase the temperature in a straight, steady line. But in reality, the warming effect of $CO_2$ actually slows down a little bit as the atmosphere gets more crowded with it. 
+\begin{itemize}
+    \item \textbf{Why it matters:} We updated our formulas to calculate the temperature change logarithmically. Think of it like adding blankets when you're cold, the first few blankets make a huge difference, but adding a 10th blanket doesn't warm you up as much as the first one did. This makes our model match up with real atmospheric science.
+\end{itemize}
+
+% Image Placeholder for Logarithmic Climate Forcing
+\begin{figure}[H]
+    \centering
+    % Replace 'log_forcing.png' with your actual screenshot filename
+    \includegraphics[width=0.8\textwidth]{log_forcing.png}
+    \caption{A screenshot of our Stock and Flow model showing the new logarithmic math for climate forcing.}
+    \label{fig:log_forcing}
+\end{figure}
+
+\subsection{Making the Carbon Cycle More Realistic}
+In our first model, we treated "planting trees" (afforestation) like a magic fix that could just absorb infinite amounts of carbon. We realized that wasn't very realistic. So, we updated the model to split the Earth's "carbon sinks" into three real parts: the ocean, the land (plants and soil), and the atmosphere.
+\begin{itemize}
+    \item \textbf{Why it matters:} We added limits to how much these sinks can hold. For example, as the ocean absorbs more carbon, it becomes too acidic to keep absorbing it at the same rate. This helps us see that while planting trees is great, nature has limits on how much of our pollution it can clean up over the next 50 to 100 years.
+\end{itemize}
+
+% Image Placeholder for Dynamic Carbon Cycle
+\begin{figure}[H]
+    \centering
+    % Replace 'carbon_cycle.png' with your actual screenshot filename
+    \includegraphics[width=0.8\textwidth]{carbon_cycle.png}
+    \caption{Our updated diagram showing the different carbon sinks (ocean, land, atmosphere) and their limits.}
+    \label{fig:carbon_cycle}
+\end{figure}
+
+\subsection{Adding the Permafrost Melting Trap}
+We added a really important new feedback loop: the permafrost thaw tipping point. Permafrost is frozen ground that has a ton of old greenhouse gases trapped inside it. In our new model, once the global temperature hits a certain high point, this frozen ground starts to melt and release trapped methane and $CO_2$.
+\begin{itemize}
+    \item \textbf{Why it matters:} This creates a dangerous trap. Once the permafrost starts melting, the Earth basically starts warming itself up, even if humans stop polluting. This causes a massive spike in our simulation's temperatures, which leads to crazy amounts of glacial runoff and huge global flood risks later in the simulation.
+\end{itemize}
+
+% Image Placeholder for Permafrost Thaw
+\begin{figure}[H]
+    \centering
+    % Replace 'permafrost_thaw.png' with your actual screenshot filename
+    \includegraphics[width=0.8\textwidth]{permafrost_thaw.png}
+    \caption{The section of our model that simulates the permafrost melting and releasing extra methane.}
+    \label{fig:permafrost_thaw}
+\end{figure}
+
+\subsection{Key Model Variables, Stocks, and Units}
+To make sure our simulation actually works mathematically, we had to assign specific units and roles to every part of the system. Here is a breakdown of the main variables (the things that change), the stocks (the things that accumulate), and the flows (the rates at which things move) in our updated model.
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|p{3.5cm}|p{2cm}|p{9cm}|}
+        \hline
+        \textbf{Variable Name} & \textbf{Unit} & \textbf{What it Does in the Model} \\
+        \hline
+        \multicolumn{3}{|c|}{\textbf{Stocks (Things that Accumulate)}} \\
+        \hline
+        Atmospheric Carbon & MMT & The total amount of carbon trapped in the atmosphere, which drives the warming effect. (MMT = Million Metric Tons). \\
+        Global Ice Mass & Mt & The total remaining weight of the Earth's glaciers and ice caps. \\
+        Ocean Carbon Sink & MMT & The total carbon absorbed by the ocean over time. \\
+        Land Carbon Sink & MMT & The total carbon stored in global forests, plants, and soil. \\
+        Permafrost Pool & MMT & The frozen reserves of carbon that are waiting to be released if the Earth gets too hot. \\
+        \hline
+        \multicolumn{3}{|c|}{\textbf{Flows (Rates of Change over Time)}} \\
+        \hline
+        Human Emissions & MMT/year & The rate at which human activity adds new carbon to the atmosphere every year. \\
+        Ice Melt Rate & Gt/year & How fast the global ice mass is melting away. \\
+        Ice Accumulation & Gt/year & How fast new ice is being formed from winter snowfall. \\
+        Carbon Uptake & MMT/year & The speed at which the ocean and land absorb carbon from the atmosphere. \\
+        Runoff Discharge & $km^3$/year & The volume of extra water flowing into the oceans and rivers from the melting ice. \\
+        \hline
+        \multicolumn{3}{|c|}{\textbf{Auxiliary Variables (Calculations and Triggers)}} \\
+        \hline
+        Radiative Forcing & $W/m^2$ & The actual mathematical measurement of how much extra heat is being trapped by the greenhouse gases. \\
+        Temperature Rise & $^\circ$C & How much hotter the Earth has gotten compared to normal. \\
+        Surface Albedo & $0$ to $1$ & A fraction showing how reflective the Earth is. It drops as bright white ice melts and exposes dark land or water underneath. \\
+        \hline
+    \end{tabular}
+    \caption{A summary of the main components driving the System Dynamics simulation.}
+    \label{tab:variables}
+\end{table}
+
+\section{New References for the Updates}
+\begin{enumerate}
+    \item Myhre, G., Highwood, E. J., Shine, K. P., \& Stordal, F. (1998). New estimates of radiative forcing due to well mixed greenhouse gases. \textit{Geophysical Research Letters}, 25(14), 2715-2718. (Used for the logarithmic math).
+    \item Schuur, E. A., McGuire, A. D., Schädel, C., Grosse, G., Harden, J. W., Hayes, D. J., ... \& Vonk, J. E. (2015). Climate change and the permafrost carbon feedback. \textit{Nature}, 520(7546), 171-179. (Used for the permafrost tipping point).
+    \item Sterman, J. D. (2000). \textit{Business Dynamics: Systems Thinking and Modeling for a Complex World}. McGraw-Hill. (Our main guide for building Stock and Flow models).
+    \item IPCC (2021). \textit{Climate Change 2021: The Physical Science Basis. Contribution of Working Group I to the Sixth Assessment Report of the Intergovernmental Panel on Climate Change}. Cambridge University Press.
+    \item Brun, F., Berthier, E., Wagnon, P., Kääb, A., \& Treichler, D. (2017). A spatially resolved estimate of High Mountain Asia glacier mass balances from 2000 to 2016. \textit{Nature Geoscience}, 10(9), 668-673.
+    \item Bolch, T., Kulkarni, A., Kääb, A., Huggel, C., Paul, F., Cogley, J. G., ... \& Stoffel, M. (2012). The State and Fate of Himalayan Glaciers. \textit{Science}, 336(6079), 310-314.
+\end{enumerate}
+
+\newpage
+% ==========================================
+% APPENDIX: ORIGINAL PRELIMINARY REPORT
+% ==========================================
+
+\appendix
+\section{Original Preliminary Report (Updated to Reflect General Ice Cover)}
+
+\subsection{Project Summary}
+This project investigates the direct effect of greenhouse gases on global ice cover using a system dynamics framework. By constructing a causal model, the research simulates how anthropogenic carbon emissions drive atmospheric warming, which in turn accelerates ice mass degradation worldwide. The simulation captures crucial hydrological transitions, tracking the conversion of stored glacial and polar ice into surface runoff and evaluating the subsequent risks of altered streamflows, rising sea levels, and downstream flooding.
+
+A central feature of the model is the integration of physical feedback mechanisms, specifically the albedo effect. As increasing greenhouse gas concentrations reduce overall ice cover, the exposed darker surfaces absorb more solar radiation, amplifying global warming. Furthermore, the project incorporates biological variables, such as global afforestation and carbon sequestration rates, to evaluate their potential in mitigating these warming trends. By running various greenhouse gas emission scenarios, the simulation aims to pinpoint irreversible tipping points in global ice melt and assess the effectiveness of systemic environmental interventions.
+
+\subsection{Introduction}
+Glaciers and polar ice caps are highly sensitive barometers of global climate health. Over the past century, the exponential rise in anthropogenic greenhouse gas (GHG) emissions has fundamentally altered the Earth's energy balance. Gases such as carbon dioxide and methane trap outgoing infrared radiation, leading to a steady increase in mean global temperatures. This thermal forcing has a profound, accelerated effect on cryospheres worldwide.
+
+The Earth's polar regions and high-altitude mountain ranges harbor massive volumes of terrestrial ice, serving as critical regulators of the Earth's climate system. These ice reserves act as massive frozen reservoirs that regulate global sea levels and regional hydrology, sustaining major river networks worldwide. However, elevated concentrations of greenhouse gases, compounded by local pollutants like black carbon in mountainous regions, are driving rapid glacial retreat. While the initial phase of this melting can temporarily swell river volumes, the ultimate depletion of these ice reserves threatens long-term water security for millions and risks catastrophic coastal flooding. Understanding the complex, non-linear relationship between continuous GHG emissions and global ice stability requires an integrated modeling approach, which this project addresses through system dynamics.
+
+\subsection{Literature Survey and Research Gap}
+The accelerated degradation of high-altitude and polar ice due to anthropogenic forcing is well-documented in contemporary climate science. The Intergovernmental Panel on Climate Change (IPCC, 2021) emphasizes that human-induced greenhouse gas emissions are the primary driver of the pervasive retreat of mountain glaciers and ice sheets globally [1]. Studies utilizing satellite imagery provide spatially resolved estimates of glacier mass balance, confirming significant and widespread mass loss across vulnerable regions like the Himalayas (Brun et al., 2017) and polar caps [2].
+
+Similarly, regional studies highlight that while local climatic variations exist, the overarching fate of global glaciers is dominated by sustained mass loss driven by rising temperatures (Bolch et al., 2012) [3]. This warming trajectory not only threatens freshwater availability but also alters the global hazard landscape. For instance, recent reports indicate a significant expansion in glacial lake areas in mountainous regions, greatly amplifying the risk of Glacial Lake Outburst Floods (GLOFs) [4]. Furthermore, projections suggest that a $3^\circ$C rise in global temperatures could subject vast regions to extended drought conditions, simultaneously disrupting seasonal snow accumulation and agricultural stability worldwide [5, 6].
+
+\vspace{1em}
+\noindent \textbf{Research Gap:}\\
+Despite extensive observational data confirming the adverse effect of greenhouse gases on ice cover, much of the literature remains siloed. Hydrological studies, climate forcing models, and socio-economic impact assessments are rarely integrated. Specifically, there is a deficit in predictive models that actively link continuous GHG emission pathways with real-time feedback loops (like the albedo effect) and ecological interventions within a single global framework. This project fills that gap by deploying a comprehensive system dynamics model that synthesizes climate drivers, total ice mass balance, and potential mitigation strategies.
+
+\subsection{Project Objectives}
+\begin{itemize}
+    \item To develop an integrated system dynamics model that explicitly maps the causal relationship between greenhouse gas concentrations and global ice melt rates.
+    \item To quantify the amplifying role of the ice-albedo feedback loop under varying anthropogenic emission scenarios.
+    \item To simulate the downstream hydrological consequences, specifically tracking transitions from temporary runoff surges to eventual long-term water scarcity and sea-level rise.
+    \item To evaluate the mitigating potential of systemic interventions, such as carbon sequestration via global afforestation, on stabilizing ice environments.
+\end{itemize}
+
+\subsection{Proposed Methodology}
+The research relies on System Dynamics modeling (using platforms like Stella or Vensim) to capture the complex, interdependent variables affecting global ice ecosystems.
+
+\begin{itemize}
+    \item \textbf{Causal Loop Modeling:} We will map out both balancing and reinforcing feedback mechanisms. The core reinforcing loop will demonstrate how GHG-induced temperature increases cause ice melt, which lowers surface albedo, thereby increasing thermal absorption and further accelerating melt.
+    
+    % First Image Insertion (Original)
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{cld.png}
+        \caption{Causal Loop Diagram illustrating the feedback mechanisms between emissions, warming, and global ice degradation.}
+        \label{fig:cld_old}
+    \end{figure}
+    
+    \item \textbf{Stock and Flow Structures:}
+    \begin{itemize}
+        \item \textbf{Stocks:} Atmospheric GHG Load, Total Global Ice Mass, and Meltwater Runoff Volume.
+        \item \textbf{Flows:} Rate of Carbon Emissions, Rate of Snow/Ice Accumulation, Rate of Ice Ablation (melting), and Runoff Discharge.
+    \end{itemize}
+    
+    % Second Image Insertion (Original)
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{balala.jpeg}
+        \caption{Stock and Flow Diagram representing the physical accumulations and rates of change in the global ice system.}
+        \label{fig:sfd_old}
+    \end{figure}
+
+    \item \textbf{Scenario Simulation:} The framework will be subjected to different emission trajectories (aligning with standard Shared Socioeconomic Pathways or SSPs) to observe the dynamic response of the global ice mass over a projected 50 to 100 year timeline.
+\end{itemize}
+
+\subsection{Expected Outcomes}
+\begin{itemize}
+    \item Identification of critical ecological tipping points where the rate of ice melting permanently outpaces winter accumulation due to sustained GHG levels.
+    \item A robust visual and mathematical demonstration of ``peak water'', the point at which increased river flow from accelerated melting reverses into chronic water shortages.
+    \item Data-driven insights into how aggressively emission reductions and global afforestation must be implemented to preserve the Earth's remaining ice systems.
+\end{itemize}
+
+\subsection{Original References}
+\begin{enumerate}
+    \item IPCC (2021). \textit{Climate Change 2021: The Physical Science Basis. Contribution of Working Group I to the Sixth Assessment Report of the Intergovernmental Panel on Climate Change}. Cambridge University Press.
+    \item Brun, F., Berthier, E., Wagnon, P., Kääb, A., \& Treichler, D. (2017). A spatially resolved estimate of High Mountain Asia glacier mass balances from 2000 to 2016. \textit{Nature Geoscience}, 10(9), 668-673.
+    \item Bolch, T., Kulkarni, A., Kääb, A., Huggel, C., Paul, F., Cogley, J. G., ... \& Stoffel, M. (2012). The State and Fate of Himalayan Glaciers. \textit{Science}, 336(6079), 310-314.
+    \item The Hindu (2024). \textit{Himalayan glacial lakes saw 10.81\% area expansion from 2011 to 2024: Report}.
+    \item The Hindu (2024). \textit{Global warming: 90\% Himalayas face year-long drought at 3 degrees, says study}.
+    \item The Hindu (2023). \textit{Himalayan glaciers could lose 80\% of their volume if global warming isn't controlled}.
+    \item The Hindu (2023). \textit{Rising temperatures are leading to torrential rains in the Himalayas}.
+\end{enumerate}
+
+\end{document}
