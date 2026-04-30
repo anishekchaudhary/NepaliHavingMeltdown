@@ -22,7 +22,7 @@ Human Emission=
 
 Permafrost Emission=
 	IF THEN ELSE(Delta Temperature > Permafrost Thaw Threshold,
-		0.037 * (Delta Temperature - Permafrost Thaw Threshold), 0)
+		0.020 * (Delta Temperature - Permafrost Thaw Threshold), 0)
 	~	Gt CO2/Year
 	~		|
 
@@ -32,7 +32,7 @@ Ocean Sink=
 	~		|
 
 Terrestrial Sink=
-	3.1 + 4.84e-05 * Forest Cover
+	3.1 + 3.9e-08 * Forest Cover
 	~	Gt CO2/Year
 	~		|
 
@@ -57,7 +57,7 @@ Base Temperature=
 	~		|
 
 GHG Temperature Effect=
-	3 * LN(MAX(GreenHouseGas / Initial GHG, 1))
+	3 * LN(MAX(GreenHouseGas / Initial GHG, 1)) / LN(2)
 	~	dmnl
 	~		|
 
@@ -128,7 +128,7 @@ Glacier Melt Rate=
 	~		|
 
 Melt Sensitivity=
-	0.86
+	0.47
 	~	km/Year
 	~		|
 
