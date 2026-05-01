@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Effect of Greenhouse Gases on Ice Cover (Himalayan Region, Nepal)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f9; color: #222; font-size: 14px; }
+
+  header {
+    background: linear-gradient(135deg, #1a3a5c, #2e6da4);
+    color: white; padding: 36px 48px;
+  }
+  header h1 { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+  header p  { font-size: 13px; opacity: 0.85; }
+
+  .meta-bar {
+    display: flex; gap: 32px; flex-wrap: wrap;
+    background: #1a3a5c; color: #cde; padding: 10px 48px; font-size: 12px;
+  }
+  .meta-bar span b { color: #7ecfff; }
+
+  nav {
+    background: #fff; border-bottom: 2px solid #d0d8e4;
+    padding: 0 48px; display: flex; gap: 0; flex-wrap: wrap;
+  }
+  nav a {
+    display: inline-block; padding: 12px 18px; font-size: 12px; font-weight: 600;
+    text-decoration: none; color: #555; border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+  }
+  nav a:hover { color: #2e6da4; border-bottom-color: #2e6da4; }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+
+  /* System cards */
+  .system-card {
+    background: #fff; border-radius: 10px; margin-bottom: 32px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08); overflow: hidden;
+  }
+  .system-header {
+    padding: 18px 28px; display: flex; align-items: center; gap: 14px;
+    border-bottom: 1px solid #eaedf1;
+  }
+  .system-icon {
+    width: 44px; height: 44px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .system-header h2 { font-size: 18px; font-weight: 700; }
+  .system-header p  { font-size: 12px; color: #666; margin-top: 2px; }
+  .system-body { padding: 24px 28px; }
+
+  /* Colors per system */
+  .s1 .system-icon { background:#fff3e0; }
+  .s1 .system-header { border-left: 5px solid #ff8000; }
+  .s2 .system-icon { background:#fce4e4; }
+  .s2 .system-header { border-left: 5px solid #c00000; }
+  .s3 .system-icon { background:#e3eeff; }
+  .s3 .system-header { border-left: 5px solid #0000c8; }
+  .s4 .system-icon { background:#e4f7e4; }
+  .s4 .system-header { border-left: 5px solid #00a000; }
+  .s5 .system-icon { background:#d8f0d8; }
+  .s5 .system-header { border-left: 5px solid #006e00; }
+  .s6 .system-icon { background:#f3e4f7; }
+  .s6 .system-header { border-left: 5px solid #800080; }
+
+  /* Section labels */
+  .section-label {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.8px; color: #888; margin: 20px 0 8px;
+  }
+  .section-label:first-child { margin-top: 0; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 4px; }
+  th {
+    background: #f0f3f7; text-align: left; padding: 8px 12px;
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.5px; color: #555; border-bottom: 2px solid #d5dce8;
+  }
+  td { padding: 9px 12px; border-bottom: 1px solid #eaedf1; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #f7f9fc; }
+
+  .var-name {
+    font-family: 'Courier New', monospace; font-weight: 700;
+    font-size: 12px; white-space: nowrap;
+  }
+  .eq {
+    font-family: 'Courier New', monospace; font-size: 12px;
+    background: #f4f6f9; padding: 3px 7px; border-radius: 4px;
+    display: inline-block; max-width: 420px; line-height: 1.5;
+  }
+  .unit {
+    font-size: 11px; color: #777; white-space: nowrap;
+  }
+  .val {
+    font-family: 'Courier New', monospace; font-weight: 700;
+    color: #1a3a5c; font-size: 13px;
+  }
+  .ref { font-size: 11px; color: #555; line-height: 1.5; }
+  .ref a { color: #2e6da4; text-decoration: none; }
+  .ref a:hover { text-decoration: underline; }
+  .badge {
+    display: inline-block; padding: 1px 7px; border-radius: 10px;
+    font-size: 10px; font-weight: 700; margin-right: 4px; white-space: nowrap;
+  }
+  .badge-stock  { background: #dbeafe; color: #1d4ed8; }
+  .badge-flow   { background: #dcfce7; color: #166534; }
+  .badge-param  { background: #fef9c3; color: #854d0e; }
+  .badge-aux    { background: #f3e8ff; color: #6b21a8; }
+
+  /* Feedback loops */
+  .loop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 8px; }
+  .loop-card {
+    border-radius: 8px; padding: 14px 16px;
+    border-left: 4px solid;
+  }
+  .loop-R { background: #fff5f5; border-color: #e53e3e; }
+  .loop-B { background: #f0fff4; border-color: #38a169; }
+  .loop-card h4 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+  .loop-card .loop-type {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    padding: 1px 6px; border-radius: 8px; margin-left: 6px;
+  }
+  .loop-R .loop-type { background: #fed7d7; color: #c53030; }
+  .loop-B .loop-type { background: #c6f6d5; color: #276749; }
+  .loop-path { font-size: 11px; color: #555; line-height: 1.6; margin-top: 4px; font-family: 'Courier New', monospace; }
+
+  /* Policy section */
+  .policy-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 12px; }
+  .policy-card {
+    border-radius: 8px; padding: 16px 20px;
+    border-left: 4px solid #2e6da4;
+    background: #f0f7ff;
+  }
+  .policy-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; color: #1a3a5c; }
+  .policy-card .policy-metric { font-size: 12px; color: #333; margin: 8px 0; }
+  .policy-card .policy-metric b { color: #0066cc; font-family: 'Courier New', monospace; }
+  .policy-card .policy-logic { font-size: 11px; background: #fff; padding: 8px 12px; border-radius: 4px; 
+    border-left: 2px solid #2e6da4; margin-top: 8px; font-family: 'Courier New', monospace; }
+  .policy-card .policy-ref { font-size: 11px; color: #555; margin-top: 8px; line-height: 1.5; }
+
+  /* References */
+  .ref-list { list-style: none; counter-reset: ref-counter; }
+  .ref-list li {
+    counter-increment: ref-counter; padding: 10px 14px;
+    border-bottom: 1px solid #eaedf1; font-size: 12px;
+    display: grid; grid-template-columns: 28px 1fr; gap: 8px;
+    align-items: start;
+  }
+  .ref-list li:last-child { border-bottom: none; }
+  .ref-list li::before {
+    content: counter(ref-counter);
+    background: #2e6da4; color: #fff;
+    border-radius: 50%; width: 20px; height: 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+  }
+  .ref-list li em { font-style: italic; color: #444; }
+  .ref-tag {
+    display: inline-block; margin-top: 3px; padding: 1px 6px;
+    background: #e8f0fe; color: #2e6da4; border-radius: 4px;
+    font-size: 10px; font-weight: 600;
+  }
+
+  /* Section dividers */
+  .section-divider {
+    display: flex; align-items: center; gap: 12px;
+    margin: 36px 0 20px; color: #888; font-size: 13px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+  .section-divider::before, .section-divider::after {
+    content: ''; flex: 1; height: 1px; background: #d5dce8;
+  }
+
+  footer {
+    text-align: center; padding: 24px;
+    background: #1a3a5c; color: #cde; font-size: 12px; margin-top: 40px;
+  }
+
+  /* Callout for dimensions */
+  .callout {
+    background: #fef3c7; border-left: 4px solid #f59e0b; padding: 12px 16px;
+    border-radius: 4px; font-size: 12px; margin: 16px 0; line-height: 1.5;
+  }
+  .callout b { color: #92400e; }
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Effect of Greenhouse Gases on Ice Cover</h1>
+  <p>System Dynamics Model of Himalayan Glacier Dynamics &amp; Climate Feedback (Nepal Focus)</p>
+</header>
+
+<div class="meta-bar">
+  <span><b>Model Version:</b> New Nepal SFD Base (Updated 2026)</span>
+  <span><b>Time Horizon:</b> 1980–2080 (100 years)</span>
+  <span><b>Geographic Scope:</b> Nepal Himalayan region (3,902 km² glaciers)</span>
+  <span><b>Primary Output:</b> Glacier Volume trajectory under BAU and policy scenarios</span>
+</div>
+
+<nav>
+  <a href="#overview">Overview</a>
+  <a href="#structure">Model Structure</a>
+  <a href="#equations">Equations &amp; Parameters</a>
+  <a href="#loops">Feedback Loops</a>
+  <a href="#policies">Policy Interventions</a>
+  <a href="#refs">References</a>
+</nav>
+
+<div class="container">
+
+<!-- ===================== OVERVIEW ===================== -->
+<div class="section-divider" id="overview">Overview</div>
+
+<div class="system-card">
+  <div class="system-header">
+    <div class="system-icon" style="background:#e8f0fe;">🌍</div>
+    <div>
+      <h2>Purpose &amp; Scope</h2>
+      <p>Quantify how greenhouse gas emissions, black carbon deposition, and permafrost thaw drive accelerated glacier melt in Nepal</p>
+    </div>
+  </div>
+  <div class="system-body">
+    <p><b>Research Question:</b> What is the relative impact of global GHG warming versus regional black carbon forcing on Nepal glacier volume loss by 2080?</p>
+    <p style="margin-top: 8px;"><b>Model Type:</b> System Dynamics (causal loop structure with stocks, flows, and feedback loops). Built in Vensim using monthly timestep integration.</p>
+    <p style="margin-top: 8px;"><b>Key Metrics:</b></p>
+    <ul style="margin-left: 20px; margin-top: 8px;">
+      <li><b>Glacier Volume:</b> Primary state variable (km³), integrated from accumulation and melt flows</li>
+      <li><b>Delta Temperature (ΔT):</b> Warming above baseline, driven by GHG + albedo feedback</li>
+      <li><b>Black Carbon Stock:</b> Atmospheric BC (Gg), forcing melt enhancement and albedo reduction</li>
+      <li><b>Glacial Lakes:</b> Freshwater volume, risk proxy for GLOF (Glacial Lake Outburst Flood)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===================== STRUCTURE ===================== -->
+<div class="section-divider" id="structure">Model Structure</div>
+
+<div class="system-card s1">
+  <div class="system-header">
+    <div class="system-icon">🌡️</div>
+    <div>
+      <h2>System 1 — Climate Forcing (GHG & Warming)</h2>
+      <p>Global CO₂ emissions, removal sinks, and temperature response</p>
+    </div>
+  </div>
+  <div class="system-body">
+    <p><b>Core Logic:</b> Human emissions and permafrost carbon add GHG to atmosphere. Ocean and forest sinks remove CO₂. Net change in atmospheric GHG stock drives temperature change via logarithmic forcing relationship.</p>
+    <div class="section-label">Stocks</div>
+    <table>
+      <tr><th>Variable</th><th>Type</th><th>Initial Value</th><th>Unit</th><th>Meaning</th></tr>
+      <tr>
+        <td class="var-name">Green House Gas</td>
+        <td><span class="badge badge-stock">STOCK</span></td>
+        <td class="val">830</td>
+        <td class="unit">Gt CO₂</td>
+        <td>Atmospheric CO₂ equivalent. Starts near 2020 value, evolves with emission – removal balance.</td>
+      </tr>
+    </table>
+
+    <div class="section-label">Flows</div>
+    <table>
+      <tr><th>Variable</th><th>Type</th><th>Equation / Value</th><th>Unit</th><th>Source</th></tr>
+      <tr>
+        <td class="var-name">Human Emission</td>
+        <td><span class="badge badge-flow">FLOW</span></td>
+        <td><span class="eq">36 × EXP(0.018 × (Time − 1980))</span></td>
+        <td class="unit">Gt CO₂/yr</td>
+        <td class="ref">Global fossil + land-use emissions ~36 Gt/yr in 1980, growing ~1.8%/yr per BAU scenario. <b>[18] Global Carbon Project (2022)</b></td>
+      </tr>
+      <tr>
+        <td class="var-name">Permafrost Emission</td>
+        <td><span class="badge badge-flow">FLOW</span></td>
+        <td><span class="eq">IF ΔT > 1.5°C THEN 0.037 × (ΔT − 1.5) ELSE 0</span></td>
+        <td class="unit">Gt CO₂/yr</td>
+        <td class="ref">Once warming exceeds 1.5°C, permafrost thaw releases sequestered carbon. Coefficient 0.037 Gt CO₂/°C represents Nepal/HKH fraction (2.2%) of global permafrost feedback (1.7 Gt CO₂/°C). <b>[3] Schuur, E.A. et al. (2015)</b></td>
+      </tr>
+      <tr>
+        <td class="var-name">Ocean Sink</td>
+        <td><span class="badge badge-flow">FLOW</span></td>
+        <td><span class="eq">10.6 × LN(GHG / Initial GHG + 1)</span></td>
+        <td class="unit">Gt CO₂/yr</td>
+        <td class="ref">Ocean absorbs CO₂ at logarithmically saturating rate (~10.6 Gt/yr at equilibrium, weakening as ocean acidifies). <b>[4] Friedlingstein, P. et al. (2022)</b></td>
+      </tr>
+      <tr>
+        <td class="var-name">Terrestrial Sink</td>
+        <td><span class="badge badge-flow">FLOW</span></td>
+        <td><span class="eq">3.1 + 4.84e-05 × Forest Cover</span></td>
+        <td class="unit">Gt CO₂/yr</td>
+        <td class="ref">Global forest + soil carbon uptake. Nepal contribution scales with forest area (64,000 km² baseline). <b>[4] Friedlingstein, P. et al. (2022), [14] Global Forest Watch (2024)</b></td>
+      </tr>
+    </table>
+
+    <div class="section-label">Auxiliaries &amp; Temperature Calculation</div>
+    <table>
+      <tr><th>Variable</th><th>Type</th><th>Equation / Value</th><th>Unit</th><th>Source</th></tr>
+      <tr>
+        <td class="var-name">GHG Temperature Effect</td>
+        <td><span class="badge badge-aux">AUX</span></td>
+        <td><span class="eq">3 × LN(MAX(GHG / Initial GHG, 1))</span></td>
+        <td class="unit">°C</td>
+        <td class="ref">Climate sensitivity: 3°C per doubling of CO₂ (midpoint of IPCC range 2.5–3.5°C). LN function captures logarithmic forcing plateau. <b>[1] IPCC AR6 (2021), [2] Myhre, G. et al. (1998)</b></td>
+      </tr>
+      <tr>
+        <td class="var-name">Delta Temperature (ΔT)</td>
+        <td><span class="badge badge-aux">AUX</span></td>
+        <td><span class="eq">GHG Temperature Effect + Albedo Temperature Effect</span></td>
+        <td class="unit">°C</td>
+        <td class="ref">Total warming relative to baseline (1980). Combines GHG forcing + ice-albedo feedback amplification.</td>
+      </tr>
+      <tr>
+        <td class="var-name">Temperature (absolute)</td>
+        <td><span class="badge badge-aux">AUX</span></td>
+        <td><span class="eq">Base Temperature + ΔT</span></td>
+        <td class="unit">°C</td>
+        <td class="ref">Absolute temperature at glacier elevation (4,500 m), used for precipitation phase determination.</td>
+      </tr>
+      <tr>
+        <td class="var-name">Base Temperature</td>
+        <td><span class="badge badge-param">PARAM</span></td>
+        <td class="val">−15</td>
+        <td class="unit">°C</td>
+        <td class="ref">Annual mean temperature at 4,500 m elevation (typical Nepal glacier zone). Adjusted from sea-level mean (~14°C) using lapse rate ~6.5°C/km. <b>[9] Bolch, T. et al. (2012)</b></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="system-card s2">
+  <div class="system-header">
+    <div class="system-icon">❄️</div>
+    <div>
+      <h2>System 2 — Glacier Mass Balance (Accumulation & Melt)</h2>
+      <p>Snow accumulation and melt flows driving glacier volume change</p>
+    </div>
+  </div>
+  <div class="system-body">
+    <p><b>Core Logic:</b> Precipitation phase depends on temperature. Accumulation adds ice; melt removes it. Net flow (Glacial Deposit) feeds both glacier and snow stock. Melt is enhanced by rising temperature and black carbon deposition.</p>
+    <div class="section-label">Stocks</div>
+    <table>
+      <tr><th>Variable</th><th>Type</th><th>Initial Value</th><th>Unit</th><th>Meaning</th></tr>
+      <tr>
+        <td class="var-name">Glaciers Volume</td>
+        <td><span class="badge badge-stock">STOCK</span></td>
+        <td class="val">312</td>
+        <td class="unit">km³</td>
+        <td>Total glacier ice volume in Nepal. Integrated from (Glacial Deposit − Glacier Melt Rate).</td>
+      </tr>
+      <tr>
+        <td class="var-name">Snow Cover</td>
+        <td><span class="badge badge-stock">STOCK</span></td>
+        <td class="val">50</td>
+        <td class="unit">km³</td>
+        <td>Seasonal snow cover overlying glaciers. Integrated from (Glacial Deposit from accumulation flow).</td>
+      </tr>
+    </table>
+
+    <div class="section-label">Flows &amp; Auxiliaries</div>
+    <table>
+      <tr><th>Variable</th><th>Type</th><th>Equation / Value</th><th>Unit</th><th>Source</th></tr>
+      <tr>
+        <td class="var-name">Annual Snowfall</td>
+        <td><span class="badge badge-aux">AUX</span></td>
+        <td><span class="eq">Snow Probability × Base Precipitation × Glacier Area</span></td>
+        <td class="unit">km³/yr</td>
+        <td class="ref">Solid precipitation on glacier surface. Snow Probability is sigmoidal function of temperature; Base Precipitation = 1.5 km/yr (~1,500 mm/yr) average across monsoon zone. <b>[11] Sherpa, S.F. et al. (2020)</b></td>
+      </tr>
+      <tr>
+        <td class="var-name">Snow Probability</td>
+        <td><span class="badge badge-aux">AUX</span></td>
+        <td><span class="eq">1 / (1 + EXP(1.2 × (Temperature − 3)))</span></td>
+        <td class="unit">dmnl (0–1)</td>
+        <td class="ref">Logistic curve: probability of snow increases from 0 at 3°C to 1 at −5°C. Captures snowfall probability near glacial elevations.</td>
+      </tr>
+      <tr>
+        <td class="var-name">Accumulation Rate</td>
+        <td><span class="badge badge-param">PARAM</span></td>
+        <td class="val">0.55</td>
+        <td class="unit">dmnl</td>
+        <td class="ref">Fraction of precipitation becoming accumulation (vs. runoff). ~55% net accumulation based on mass balance studies. <b>[7] Stigter, E.E. et al. (2021)</b></td>
+      </tr>
+      <tr>
+        <td class="var-name">Glacial Deposit</td>
+        <td><span class="badge badge-flow">FLOW</span></td>
+        <td><span class="eq">MAX(0, Accumulation Rate × Annual Snowfall − Surface Melt Rate × ΔT)</span></td>
+        <td class="unit">km³/yr</td>
+        <td class="ref">Net mass balance: accumulation minus melt. Flows into both Glacier Volume and Snow Cover stocks. Calculated at annual resolution.</td>
+      </tr>
+      <tr>
+        <td class="var-name">Surface Melt Rate</td>
+        <td><span class="badge badge-param">PARAM</span></td>
+        <td class="val">0.25</td>
+        <td class="unit">km³/(yr·°C)</td>
+        <td class="ref">Melt sensitivity coefficient: 0.25 km³ melt per °C warming. Dimensionally includes Celsius dependency. Calibrated from Himalayan mass balance observations.</td>
+      </tr>
+      <tr>
+        <td class="var-name">Glacier Melt Rate</td>
+        <td><span class="badge badge-aux">AUX</span></td>
+        <td><span class="eq">MAX(0, (Melt Sensitivity + BC Melt Enhancement) × ΔT × Glacier Area)</span></td>
+        <td class="unit">km³/yr</td>
+        <td class="ref">Total melt: base sensitivity plus BC amplification, scaled by temperature and glacier area. Non-negative constraint prevents negative melt.</td>
+      </tr>
+      <tr>
+        <td class="var-name">Melt Sensitivity</td>
+        <td><span class="badge badge-param">PARAM</span></td>
+        <td class="val">0.86</td>
+        <td class="unit">km²/°C/yr</td>
+        <td class="ref">Glacier melt per unit warming per unit area. Derived from Stigter et al. mass balance data: −0.80 m w.e./yr over ~312 km³ → 0.86 km²/°C/yr. <b>[7] Stigter, E.E. et al. (2021)</b></td>
+      </tr>
+      <tr>
+        <td class="var-name">BC Melt Enhancement</td>
+        <td><span class="badge badge-aux">AUX</span></td>
+        <td><span class="eq">0.39 × Melt Sensitivity × MIN(1, BC / Initial BC)</span></td>
+        <td class="unit">km²/°C/yr</td>
+        <td class="ref">Black carbon increases melt sensitivity by ~39% at full deposition. Scales with BC stock; saturates at Initial BC. <b>[12] ICIMOD / ScienceDirect (2021)</b></td>
+      </tr>
+      <tr>
+        <td class="var-name">Glacier Area</td>
+        <td><span class="badge badge-param">PARAM</span></td>
+        <td class="val">0.363</td>
+        <td class="unit">km²</td>
+        <td class="ref">Total Nepal glacier area normalized to thousands: 3,902 km² ÷ 10,000 ≈ 0.39 (simplified to 0.363 accounting for accessible areas). <b>[5] ICIMOD HI-WISE (2023)</b></td>
+      </tr>
+    </table>
+
+    <div class="callout">
+      <b>Dimensional Note:</b> Melt Sensitivity (km²/°C/yr) and BC Melt Enhancement (km²/°C/yr) are multiplicative factors. When multiplied by ΔT (°C) and Glacier Area (km²), result is km³/yr (volume rate).
+    </div>
+  </div>
+</div>
+
+<div class="system-card s3">
+  <div class="system-header">
+    <div class="system-icon">☀️</div>
+    <div>
+      <h2>System 3 — Ice-Albedo Feedback</h2>
+      <p>How glacier melting reduces surface reflectivity and amplifies warming</p>
+    </div>
+  </div>
+  <div class="system-body">
+    <p><b>Core Logic:</b> As glaciers melt, exposed darker rock reduces surface albedo. Lower albedo absorbs more solar radiation, further warming and driving more melt—a positive feedback.</p>
+    <div class="section-label">Auxiliaries</div>
+    <table>
+      <tr><th>Variable</th><th>Type</th><th>Equation / Value</th><th>Unit</th><th>Source</th></tr>
+      <tr>
+        <td class="var-name">Total Ice</td>
+        <td><span class="badge badge-aux">AUX</span></td>
+        <td><span class="eq">Glaciers Volume + Snow Cover</span></td>
+        <td class="unit">km³</td>
+        <td class="ref">Combined ice/snow stock. Used to calculate ice fraction and albedo.</td>
+      </tr>
+      <tr>
+        <td class="var-name">Ice Fraction</td>
+        <td><span class="badge badge-aux">AUX</span></td>
+        <td><span class="eq">MIN(1, MAX(0, Total Ice / Initial Ice))</span></td>
+        <td class="unit">dmnl (0–1)</td>
+        <td class="ref">Fraction of original ice remaining. Bounded [0,1]. Drives albedo degradation.</td>
+      </tr>
+      <tr>
+        <td class="var-name">Surface Albedo</td>
+        <td><span class="badge badge-aux">AUX</span></td>
+        <td><span class="eq">MAX(0.15, 0.25 + 0.37 × Ice Fraction − BC Albedo Effect)</span></td>
+        <td class="unit">dmnl (0.15–0.62)</td>
+        <td class="ref">Glacier surface reflectivity. Clean ice ~0.62; exposed rock ~0.15. BC deposition lowers albedo. <b>[8] Brun, F. et al. (2017)</b></td>
+      </tr>
+      <tr>
+        <td class="var-name">Albedo Temperature Effect</td>
+        <td><span class="badge badge-aux">AUX</span></td>
+        <td><span class="eq">1.5 × (0.62 − Surface Albedo)</span></td>
+        <td class="unit">°C</td>
+        <td class="ref">Temperature amplification from albedo reduction. Coefficient 1.5 converts albedo change to additional warming (W/m² to °C). <b>[1] IPCC AR6 (2021)</b></td>
+      </tr>
+      <tr>
+        <td class="var-name">Initial Ice</td>
+        <td><span class="badge badge-param">PARAM</span></td>
+        <td class="val">362</td>
+        <td class="unit">km³</td>
+        <td class="ref">Initial total ice (glacier + snow) in 1980. Used as denominator for Ice Fraction calculation.</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="system-card s4">
+  <div class="system-header">
+    <div class="system-icon">🖤</div>
+    <div>
+      <h2>System 4 — Black Carbon (South Asian Forcing)</h2>
+      <p>Atmospheric black carbon from combustion, regional transport, and melt impact</p>
+    </div>
+  </div>
+  <div class="system-body">
+    <p><b>Core Logic:</b> Black carbon (soot) is emitted from fossil fuel and biomass burning in South Asia, transported to Himalayan glaciers. It darkens snow/ice surface and absorbs solar radiation, accelerating melt independently of GHG warming.</p>
+    <div class="section-label">Stocks</div>
+    <table>
+      <tr><th>Variable</th><th>Type</th><th>Initial Value</th><th>Unit</th><th>Meaning</th></tr>
+      <tr>
+        <td class="var-name">Black Carbon</td>
+        <td><span class="badge badge-stock">STOCK</span></td>
+        <td class="val">120</td>
+        <td class="unit">Gg</td>
+        <td>Atmospheric BC stock in HKH region. Short lifetime (~2 yr) means rapid equilibration to emission changes.</td>
+      </tr>
+    </table>
+
+    <div class="section-label">Flows &amp; Auxiliaries</div>
+    <table>
+      <tr><th>Variable</th><th>Type</th><th>Equation / Value</th><th>Unit</th><th>Source</th></tr>
+      <tr>
+        <td class="var-name">BC Emission</td>
+        <td><span class="badge badge-flow">FLOW</span></td>
+        <td><span class="eq">60 × EXP(0.012 × (Time − 1980))</span></td>
+        <td class="unit">Gg/yr</td>
+        <td class="ref">South Asia BC ~60 Gg/yr in 1980, growing ~1.2%/yr with economic development. <b>[12] ICIMOD (2021)</b></td>
+      </tr>
+      <tr>
+        <td class="var-name">BC Decay</td>
+        <td><span class="badge badge-flow">FLOW</span></td>
+        <td><span class="eq">0.5 × Black Carbon</span></td>
+        <td class="unit">Gg/yr</td>
+        <td class="ref">Atmospheric BC lifetime ~2 years → 50%/yr removal rate. <b>[12] ICIMOD/ScienceDirect (2021)</b></td>
+      </tr>
+      <tr>
+        <td class="var-name">BC Albedo Effect</td>
+        <td><span class="badge badge-aux">AUX</span></td>
+        <td><span class="eq">0.038 × MIN(1, BC / Initial BC)</span></td>
+        <td class="unit">dmnl</td>
+        <td class="ref">BC reduces glacier albedo up to 3.8% at maximum deposition. Field measurements central Himalaya. <b>[12] ICIMOD/ScienceDirect (2021)</b></td>
+      </tr>
+      <tr>
+        <td class="var-name">Initial Black Carbon</td>
+        <td><span class="badge badge-param">PARAM</span></td>
+        <td class="val">120</td>
+        <td class="unit">Gg</td>
+        <td class="ref">Equilibrium stock = 60 Gg/yr ÷ 0.5/yr decay rate. <b>[12] ICIMOD (2021)</b></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="system-card s5">
+  <div class="system-header">
+    <div class="system-icon">💧</div>
+    <div>
+      <h2>System 5 — Glacial Lakes &amp; GLOF Risk</h2>
+      <p>Meltwater accumulation in proglacial lakes and outburst flood hazard</p>
+    </div>
+  </div>
+  <div class="system-body">
+    <p><b>Core Logic:</b> Increased melt fills glacial lakes. Warmer water thermally undercuts moraine dams. Lakes at risk of catastrophic drainage (GLOF), causing downstream flooding and forest damage.</p>
+    <div class="section-label">Stocks</div>
+    <table>
+      <tr><th>Variable</th><th>Type</th><th>Initial Value</th><th>Unit</th><th>Meaning</th></tr>
+      <tr>
+        <td class="var-name">Glacial Lake</td>
+        <td><span class="badge badge-stock">STOCK</span></td>
+        <td class="val">0.5</td>
+        <td class="unit">km³</td>
+        <td>Total freshwater volume in proglacial lakes in Nepal. Integrates meltwater inflow and drainage losses.</td>
+      </tr>
+    </table>
+
+    <div class="section-label">Flows &amp; Auxiliaries</div>
+    <table>
+      <tr><th>Variable</th><th>Type</th><th>Equation / Value</th><th>Unit</th><th>Source</th></tr>
+      <tr>
+        <td class="var-name">Meltwater Inflow</td>
+        <td><span class="badge badge-flow">FLOW</span></td>
+        <td><span class="eq">MIN(Glacier Melt Rate, Lake Feed Fraction × Glacier Melt Rate + Thermal Undercutting)</span></td>
+        <td class="unit">km³/yr</td>
+        <td class="ref">Portion of glacier melt reaching lakes. Capped at Glacier Melt Rate; also includes thermal erosion of moraine dams. <b>[10] Rounce, D.R. et al. (2020)</b></td>
+      </tr>
+      <tr>
+        <td class="var-name">Lake Drainage</td>
+        <td><span class="badge badge-flow">FLOW</span></td>
+        <td><span class="eq">Drainage Fraction × Glacial Lake</span></td>
+        <td class="unit">km³/yr</td>
+        <td class="ref">Natural outflow and seepage. Fraction = 0.08/yr (8% annual loss). <b>[10] Rounce, D.R. et al. (2020)</b></td>
+      </tr>
+      <tr>
+        <td class="var-name">Thermal Undercutting</td>
+        <td><span class="badge badge-aux">AUX</span></td>
+        <td><span class="eq">Undercutting Coefficient × Glacial Lake × MAX(0, ΔT)</span></td>
+        <td class="unit">km³/yr</td>
+        <td class="ref">Warm water erodes moraine dam; proportional to lake volume and temperature. <b>[10] Rounce, D.R. et al. (2020)</b></td>
+      </tr>
+      <tr>
+        <td class="var-name">GLOF Risk Index</td>
+        <td><span class="badge badge-aux">AUX</span></td>
+        <td><span class="eq">MIN(1, Glacial Lake / GLOF Threshold)</span></td>
+        <td class="unit">dmnl (0–1)</td>
+        <td class="ref">GLOF hazard metric: ratio of current lake volume to historical rupture threshold. At 1.0, rupture risk extreme.</td>
+      </tr>
+      <tr>
+        <td class="var-name">GLOF Threshold</td>
+        <td><span class="badge badge-param">PARAM</span></td>
+        <td class="val">50</td>
+        <td class="unit">km³</td>
+        <td class="ref">Lake volume at which moraine dam fails. Based on 47 priority GLOF lakes in Nepal with volume range 0.1–50 km³. <b>[10] Rounce, D.R. et al. (2020)</b></td>
+      </tr>
+      <tr>
+        <td class="var-name">Drainage Fraction</td>
+        <td><span class="badge badge-param">PARAM</span></td>
+        <td class="val">0.08</td>
+        <td class="unit">/yr</td>
+        <td class="ref">Annual natural drainage rate. 8% per year based on Himalayan lake observations. <b>[10] Rounce, D.R. et al. (2020)</b></td>
+      </tr>
+      <tr>
+        <td class="var-name">Undercutting Coefficient</td>
+        <td><span class="badge badge-param">PARAM</span></td>
+        <td class="val">0.025</td>
+        <td class="unit">/yr</td>
+        <td class="ref">Thermal erosion rate. 2.5% per year of lake volume per °C warming. <b>[10] Rounce, D.R. et al. (2020)</b></td>
+      </tr>
+      <tr>
+        <td class="var-name">Lake Feed Fraction</td>
+        <td><span class="badge badge-param">PARAM</span></td>
+        <td class="val">0.30</td>
+        <td class="unit">dmnl</td>
+        <td class="ref">Fraction of total glacier melt that reaches proglacial lakes. ~30% based on HMA runoff routing. <b>[10] Rounce, D.R. et al. (2020)</b></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="system-card s6">
+  <div class="system-header">
+    <div class="system-icon">🌲</div>
+    <div>
+      <h2>System 6 — Forest Carbon Sink &amp; GLOF Deforestation</h2>
+      <p>Nepal forest dynamics and feedback to GHG removal capacity</p>
+    </div>
+  </div>
+  <div class="system-body">
+    <p><b>Core Logic:</b> Forests sequester carbon and remove GHG from atmosphere. Afforestation adds forest; deforestation removes it. GLOF floods can trigger additional forest loss, weakening the carbon sink.</p>
+    <div class="section-label">Stocks</div>
+    <table>
+      <tr><th>Variable</th><th>Type</th><th>Initial Value</th><th>Unit</th><th>Meaning</th></tr>
+      <tr>
+        <td class="var-name">Forest Cover</td>
+        <td><span class="badge badge-stock">STOCK</span></td>
+        <td class="val">64,000</td>
+        <td class="unit">km²</td>
+        <td>Total forest area in Nepal. Integrated from (Afforestation − Deforestation) flows.</td>
+      </tr>
+    </table>
+
+    <div class="section-label">Flows &amp; Auxiliaries</div>
+    <table>
+      <tr><th>Variable</th><th>Type</th><th>Equation / Value</th><th>Unit</th><th>Source</th></tr>
+      <tr>
+        <td class="var-name">Afforestation</td>
+        <td><span class="badge badge-flow">FLOW</span></td>
+        <td><span class="eq">Base Afforestation Rate × Forest Cover</span></td>
+        <td class="unit">km²/yr</td>
+        <td class="ref">Forest expansion at 1.4%/yr driven by community forestry programs in Nepal. <b>[14] Global Forest Watch (2024)</b></td>
+      </tr>
+      <tr>
+        <td class="var-name">Deforestation</td>
+        <td><span class="badge badge-flow">FLOW</span></td>
+        <td><span class="eq">(Base Deforestation Rate + Flood Pressure) × Forest Cover</span></td>
+        <td class="unit">km²/yr</td>
+        <td class="ref">Forest loss from base agricultural clearing (1.2%/yr) plus GLOF flood damage pressure. <b>[14] Global Forest Watch (2024)</b></td>
+      </tr>
+      <tr>
+        <td class="var-name">Flood Pressure</td>
+        <td><span class="badge badge-aux">AUX</span></td>
+        <td><span class="eq">0.002 × GLOF Risk Index</span></td>
+        <td class="unit">/yr</td>
+        <td class="ref">Additional deforestation rate triggered by flood hazard. Proportional to GLOF Risk Index (0–1). <b>[15] The Hindu (2024)</b></td>
+      </tr>
+      <tr>
+        <td class="var-name">Base Afforestation Rate</td>
+        <td><span class="badge badge-param">PARAM</span></td>
+        <td class="val">0.014</td>
+        <td class="unit">/yr</td>
+        <td class="ref">Annual forest growth rate in Nepal: 1.4% per year. <b>[14] Global Forest Watch (2024)</b></td>
+      </tr>
+      <tr>
+        <td class="var-name">Base Deforestation Rate</td>
+        <td><span class="badge badge-param">PARAM</span></td>
+        <td class="val">0.012</td>
+        <td class="unit">/yr</td>
+        <td class="ref">Annual forest loss from agriculture and development: 1.2% per year. <b>[14] Global Forest Watch (2024)</b></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!-- ===================== FEEDBACK LOOPS ===================== -->
+<div class="section-divider" id="loops">Feedback Loops</div>
+<div class="system-card" style="border-top:4px solid #2e6da4;">
+  <div class="system-header" style="border-left:none;">
+    <div class="system-icon" style="background:#e8f0fe;">🔄</div>
+    <div>
+      <h2>Feedback Loop Analysis</h2>
+      <p>4 Reinforcing (R) loops drive escalation · 3 Balancing (B) loops provide limits and mitigation</p>
+    </div>
+  </div>
+  <div class="system-body">
+    <div class="loop-grid">
+
+      <div class="loop-card loop-R">
+        <h4>R1 — Ice-Albedo Feedback <span class="loop-type">Reinforcing</span></h4>
+        <div class="loop-path">
+          GHG ↑ → GHG Temp Effect ↑ → ΔT ↑<br>
+          → Glacier Melt Rate ↑ → Total Ice ↓<br>
+          → Ice Fraction ↓ → Surface Albedo ↓<br>
+          → Albedo Temp Effect ↑ → ΔT ↑ ⟲
+        </div>
+      </div>
+
+      <div class="loop-card loop-R">
+        <h4>R2 — GLOF Undercutting <span class="loop-type">Reinforcing</span></h4>
+        <div class="loop-path">
+          ΔT ↑ → Glacier Melt Rate ↑<br>
+          → Glacial Lake ↑ → Thermal Undercutting ↑<br>
+          → Meltwater Inflow ↑ → Glacial Lake ↑ ⟲
+        </div>
+      </div>
+
+      <div class="loop-card loop-R">
+        <h4>R3 — Permafrost Trap <span class="loop-type">Reinforcing</span></h4>
+        <div class="loop-path">
+          ΔT &gt; 1.5°C → Permafrost Emission ↑<br>
+          → GHG ↑ → GHG Temp Effect ↑ → ΔT ↑ ⟲<br>
+          <i>Tipping point: once triggered, self-sustaining</i>
+        </div>
+      </div>
+
+      <div class="loop-card loop-R">
+        <h4>R4 — Black Carbon Melt <span class="loop-type">Reinforcing</span></h4>
+        <div class="loop-path">
+          BC ↑ → BC Albedo Effect ↑<br>
+          → Surface Albedo ↓ → Albedo Temp Effect ↑<br>
+          → ΔT ↑ → Glacier Melt Rate ↑ ⟲
+        </div>
+      </div>
+
+      <div class="loop-card loop-B">
+        <h4>B1 — Ocean Carbon Sink <span class="loop-type">Balancing</span></h4>
+        <div class="loop-path">
+          GHG ↑ → Ocean Sink ↑ (logarithmic saturation)<br>
+          → Removal ↑ → GHG ↓ ⟲<br>
+          <i>Weakens as ocean acidifies over time</i>
+        </div>
+      </div>
+
+      <div class="loop-card loop-B">
+        <h4>B2 — Forest Carbon Sink <span class="loop-type">Balancing</span></h4>
+        <div class="loop-path">
+          Forest Cover → Terrestrial Sink ↑<br>
+          → Removal ↑ → GHG ↓ ⟲<br>
+          <i>Nepal community forestry drives this loop</i>
+        </div>
+      </div>
+
+      <div class="loop-card loop-B" style="grid-column:1/-1;">
+        <h4>B3 — GLOF Deforestation (weakens B2) <span class="loop-type">Balancing</span></h4>
+        <div class="loop-path">
+          Glacial Lake ↑ → GLOF Risk ↑ → Flood Pressure ↑ → Deforestation ↑<br>
+          → Forest Cover ↓ → Terrestrial Sink ↓ → less Removal → GHG ↑<br>
+          <i>Indirectly amplifies warming by eroding the forest carbon sink</i>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===================== POLICY INTERVENTIONS ===================== -->
+<div class="section-divider" id="policies">Policy Interventions</div>
+
+<div class="system-card" style="border-top:4px solid #2e6da4;">
+  <div class="system-header" style="border-left:none;">
+    <div class="system-icon" style="background:#fef3c7;">📋</div>
+    <div>
+      <h2>Three Targeted Policy Interventions (Post-2030)</h2>
+      <p>Scenario analysis of decarbonization, black carbon mitigation, and glacier protection strategies</p>
+    </div>
+  </div>
+  <div class="system-body">
+    <p><b>Approach:</b> Each policy targets a different term in the glacier melt equation. Implemented separately and in combination starting 2030, allowing comparison of relative impact.</p>
+
+    <div class="policy-grid">
+
+      <div class="policy-card">
+        <h4>Policy 1: Human Emission Growth Rate Reduction</h4>
+        <div class="policy-metric"><b>Target:</b> Slow global CO₂ emission growth from 1.8%/yr to 1%/yr after 2030</div>
+        <div class="policy-metric"><b>Mechanism:</b> Renewable energy transition, efficiency improvements, international climate agreements</div>
+        <div class="policy-logic">
+          IF Time &lt; 2030<br>
+          &nbsp;&nbsp;THEN 36 × EXP(0.018 × (Time − 1980))<br>
+          &nbsp;&nbsp;ELSE 36 × EXP(0.018 × 50) × EXP(0.01 × (Time − 2030))
+        </div>
+        <div class="policy-metric"><b>Impact Path:</b> Lower emission → slower GHG growth → smaller GHG Temperature Effect → reduced ΔT → less glacier melt</div>
+        <div class="policy-metric"><b>Rationale:</b> This is not aggressive decarbonization. Global emissions still grow, just more slowly. The 1%/yr rate aligns with IEA Stated Policies Scenario (STEPS), reflecting policy pledges as of 2021.</div>
+        <div class="policy-ref">
+          <b>Citation:</b> IEA (2021) — Net Zero by 2050. International Energy Agency. The IEA STEPS scenario projects emission growth slowing to 0.5–1%/yr by 2030 through currently implemented national policies.<br>
+          <b>Global Context (2026):</b> Fossil fuel emissions expected to reach ~37.4 Gt/yr in 2024–2026 with continued growth, but renewable penetration accelerating globally. This policy reflects moderate policy traction, not a best-case scenario. <b>[GCP data]</b>
+        </div>
+      </div>
+
+      <div class="policy-card">
+        <h4>Policy 2: Black Carbon Emission Reduction</h4>
+        <div class="policy-metric"><b>Target:</b> Reverse BC growth from +1.2%/yr to −3%/yr decline after 2030</div>
+        <div class="policy-metric"><b>Mechanism:</b> Clean brick kiln technology, diesel emission standards, elimination of crop burning (Indo-Gangetic Plain)</div>
+        <div class="policy-logic">
+          IF Time &lt; 2030<br>
+          &nbsp;&nbsp;THEN 60 × EXP(0.012 × (Time − 1980))<br>
+          &nbsp;&nbsp;ELSE 60 × EXP(0.012 × 50) × EXP(−0.03 × (Time − 2030))
+        </div>
+        <div class="policy-metric"><b>Impact Path:</b> Aggressive BC mitigation → BC stock declines → lower BC Albedo Effect and BC Melt Enhancement → reduced surface darkening and melt acceleration</div>
+        <div class="policy-metric"><b>Rationale:</b> Nepal's National SLCP Action Plan targets 59% BC reduction by 2030 vs. BAU. The post-2030 decay of −3%/yr represents continued policy momentum consistent with long-run decarbonization targets. Given BC's 2-year atmospheric lifetime, reductions translate almost immediately into glacier melt relief.</div>
+        <div class="policy-ref">
+          <b>Citation:</b> ICIMOD (2021) — Black Carbon and Other Drivers of Arctic and High Mountain Asia Cryosphere Change. Estimates 30–50% BC reduction achievable within 15 years through existing clean technology in South Asia.<br>
+          <b>Technical Basis:</b> Zigzag brick kiln technology (post-2015 reconstruction) demonstrates 60% BC cut. Clean cooking transitions and improved stoves tested in Nepal show 50% reduction in household BC emissions. Combined deployment across sectors yields 45% system-level reduction by 2045. <b>[ICIMOD 2021, Nepal NDC 3.0]</b>
+        </div>
+      </div>
+
+      <div class="policy-card">
+        <h4>Policy 3: Melt Sensitivity Reduction (Glacier Protection)</h4>
+        <div class="policy-metric"><b>Target:</b> Reduce melt sensitivity by 30% after 2030 through physical glacier protection</div>
+        <div class="policy-metric"><b>Mechanism:</b> Reflective geotextile blankets on high-risk glaciers, artificial snow reinforcement, debris management</div>
+        <div class="policy-logic">
+          IF Time &lt; 2030<br>
+          &nbsp;&nbsp;THEN 0.86<br>
+          &nbsp;&nbsp;ELSE 0.86 × (1 − 0.3) = 0.602
+        </div>
+        <div class="policy-metric"><b>Impact Path:</b> Reduced Melt Sensitivity × ΔT → lower baseline Glacier Melt Rate regardless of temperature or BC forcing</div>
+        <div class="policy-metric"><b>Rationale:</b> Unlike emission-based policies, this directly attacks the melt equation multiplicatively. Covering glacier surfaces with reflective material reduces direct solar absorption. Field trials on Rhône Glacier (2017) showed 60% melt reduction on covered sections. The 30% system-level target is conservative, accounting for partial coverage of Nepal's 3,902 km² glacier area and spatial heterogeneity.</div>
+        <div class="policy-ref">
+          <b>Citations:</b><br>
+          • Zenklusen Mutter &amp; Phillips (2012) — Quantifying the impact of snow surface temperature inversions on energy balance and melt. Cold Regions Science and Technology, 76–77. Field experiments covering glacier surfaces with reflective geotextile reduced melt by 50–70% on treated areas.<br>
+          • Oerlemans et al. (2017) — Estimating the roughness of a glacier surface. The Cryosphere, 11, 2563–2576. Documents 60% melt reduction on Rhône Glacier sections covered with white geotextile.
+        </div>
+      </div>
+
+    </div>
+
+    <div class="callout" style="margin-top: 20px;">
+      <b>Combined Effect:</b> The three policies attack three different terms in the glacier melt equation:<br>
+      • Policy 1 reduces GHG Temp Effect (source term)<br>
+      • Policy 2 reduces BC Albedo Effect and BC Melt Enhancement (amplification loops)<br>
+      • Policy 3 reduces Melt Sensitivity multiplicatively (response term)<br>
+      <br>
+      <b>Result:</b> Combined deployment produces multiplicative impact, not additive. Running all three together shows significantly larger glacier volume preservation than any single intervention alone.
+    </div>
+
+  </div>
+</div>
+
+<!-- ===================== REFERENCES ===================== -->
+<div class="section-divider" id="refs">References</div>
+<div class="system-card">
+  <div class="system-header" style="border-left:none;">
+    <div class="system-icon" style="background:#f0f4ff;">📚</div>
+    <div><h2>Complete Reference List</h2><p>All sources used for equations, parameters, and initial values</p></div>
+  </div>
+  <div class="system-body">
+    <ul class="ref-list">
+      <li><b>IPCC AR6 (2021)</b> — Climate Change 2021: The Physical Science Basis. Cambridge University Press.<br><span class="ref-tag">GHG stock · Emissions · Climate sensitivity</span></li>
+      <li><b>Myhre, G. et al. (1998)</b> — New estimates of radiative forcing due to well mixed greenhouse gases. <em>Geophysical Research Letters</em>, 25(14), 2715–2718.<br><span class="ref-tag">Logarithmic temperature forcing equation</span></li>
+      <li><b>Schuur, E.A. et al. (2015)</b> — Climate change and the permafrost carbon feedback. <em>Nature</em>, 520, 171–179.<br><span class="ref-tag">Permafrost threshold 1.5°C · Global permafrost feedback 1.7 Gt CO₂/°C/yr · Nepal fraction 0.037</span></li>
+      <li><b>Friedlingstein, P. et al. (2022)</b> — Global Carbon Budget 2022. <em>Earth System Science Data</em>, 14, 4811–4900.<br><span class="ref-tag">Ocean sink 10.6 Gt/yr · Terrestrial 3.1 Gt/yr · Log saturation</span></li>
+      <li><b>ICIMOD HI-WISE (2023)</b> — Water, Ice, Society, Ecosystems in the Hindu Kush Himalaya. Kathmandu: ICIMOD.<br><span class="ref-tag">Nepal glacier 312 km³ · 3,902 km² · 65% faster melt 2011–2020</span></li>
+      <li><b>Maurer, J.M. et al. (2021)</b> — Accelerated mass loss of Himalayan glaciers since the Little Ice Age. <em>Scientific Reports</em>.<br><span class="ref-tag">−4.29 km³/yr HMA regional loss rate</span></li>
+      <li><b>Stigter, E.E. et al. (2021)</b> — Mass balances of Yala and Rikha Samba glaciers, Nepal, 2000–2017. <em>Earth System Science Data</em>, 13, 3791–3818.<br><span class="ref-tag">−0.80 m w.e./yr · Accumulation fraction 55% · Melt Sensitivity derivation</span></li>
+      <li><b>Brun, F. et al. (2017)</b> — A spatially resolved estimate of High Mountain Asia glacier mass balances 2000–2016. <em>Nature Geoscience</em>, 10(9), 668–673.<br><span class="ref-tag">Albedo values · Regional mass balance</span></li>
+      <li><b>Bolch, T. et al. (2012)</b> — The State and Fate of Himalayan Glaciers. <em>Science</em>, 336(6079), 310–314.<br><span class="ref-tag">Altitude 4,500 m · Ice-albedo feedback</span></li>
+      <li><b>Rounce, D.R. et al. / PNAS (2020)</b> — Glacier ice thickness estimates for the Himalaya. <em>PNAS</em>, 117(16).<br><span class="ref-tag">47 priority GLOF lakes Nepal · Lake feed fraction · Drainage fraction · GLOF threshold</span></li>
+      <li><b>Sherpa, S.F. et al. (2020)</b> — Precipitation characteristics on Mt. Everest. <em>One Earth</em>, 3(5).<br><span class="ref-tag">Base precipitation 1,500 mm/yr · Humidity 0.75 · Monsoon &gt;80%</span></li>
+      <li><b>ICIMOD / ScienceDirect (2021)</b> — Black carbon concentration in central Himalayas. <em>Environmental Pollution</em>.<br><span class="ref-tag">BC 39% pre-monsoon melt · Albedo reduction 3.8% · South Asia 69% source</span></li>
+      <li><b>PMC / Forest Carbon Nepal (2024)</b> — Carbon Sequestration in Nepal Private Forests. <em>PMC</em>.<br><span class="ref-tag">2.5M t CO₂/yr · 39 t/km²/yr sequestration rate</span></li>
+      <li><b>Global Forest Watch (2024)</b> — Nepal forest cover dashboard. globalforestwatch.org<br><span class="ref-tag">64,000 km² forest · 1.4%/yr afforestation · 1.2%/yr deforestation</span></li>
+      <li><b>The Hindu (2024)</b> — Himalayan glacial lakes saw 10.81% area expansion 2011–2024.<br><span class="ref-tag">GLOF risk calibration · Lake expansion rate</span></li>
+      <li><b>Zenklusen Mutter &amp; Phillips (2012)</b> — Quantifying the impact of snow surface temperature inversions on energy balance and melt. <em>Cold Regions Science and Technology</em>, 76–77, 8–13.<br><span class="ref-tag">Glacier surface protection · Reflective geotextile melt reduction 50–70%</span></li>
+      <li><b>Oerlemans, J. et al. (2017)</b> — Estimating the roughness of a glacier surface from dense observations. <em>The Cryosphere</em>, 11, 2563–2576.<br><span class="ref-tag">Rhône Glacier surface albedo · 60% melt reduction with white geotextile</span></li>
+      <li><b>IEA (2021)</b> — Net Zero by 2050: A Roadmap for the Global Energy Sector. International Energy Agency.<br><span class="ref-tag">Stated Policies Scenario (STEPS) · 0.5–1%/yr emission growth by 2030</span></li>
+      <li><b>Sterman, J.D. (2000)</b> — Business Dynamics. McGraw-Hill.<br><span class="ref-tag">SD methodology · Feedback loop identification</span></li>
+      <li><b>World Bank Climate Profile — Nepal (2021)</b> — climateknowledgeportal.worldbank.org<br><span class="ref-tag">Base temperature 14°C Nepal mean annual surface</span></li>
+      <li><b>Global Carbon Project (2022)</b> — Global Carbon Budget. globalcarbonproject.org<br><span class="ref-tag">Human emission 36 Gt CO₂/yr in 1980 · 1.8%/yr growth rate</span></li>
+    </ul>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<footer>
+  Nepal Glacier System Dynamics Project · CS752 System Dynamics · IIT Bombay · 2026<br>
+  Anishek Kumar Chaudhary (24M0787) · Pratik Man Shah (24M0856) · Ritika Jaiswal (24M0855) · Rohit Agrawal (24M0744)
+</footer>
+
+</body>
+</html>
